@@ -10,12 +10,17 @@ describe "Static pages" do
       page.should have_content('Find Your Click')
     end
     
-    it "should have the title 'Home'" do
+    it "should have the base title" do
       visit '/static_pages/home'
       page.should have_selector('title',
-                        :text => "#{base_title} | Home")
+                        :text => "Find Your Click")
     end
-  end
+    
+      it "should not have a custom page title" do
+        visit '/static_pages/home'
+        page.should_not have_selector('title', :text => '| Home')
+      end
+    end
   
     describe "Help page" do
 
@@ -43,12 +48,13 @@ describe "Static pages" do
          page.should have_selector('title',
                        :text => "#{base_title} | About Us")
      end
+    end
      
      describe "Contact page" do
 
         it "should have the content 'Contact'" do
           visit '/static_pages/contact'
-          page.should have_content('contact')
+          page.should have_content('Contact')
         end
 
         it "should have the title 'Contact'" do
@@ -57,4 +63,5 @@ describe "Static pages" do
                         :text => "#{base_title} | Contact")
   
   end
+end
 end
